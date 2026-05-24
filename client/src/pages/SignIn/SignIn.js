@@ -187,10 +187,6 @@ const SignIn = () => {
                                 Quên mật khẩu?
                             </Link>
                         </div>
-                        <div className={styles.note}>
-                            Trang web này thực hiện cho môn học Phát triển ứng
-                            dụng Web nâng cao.
-                        </div>
                         <div className={styles.info}>
                             Chưa có tài khoản?{" "}
                             <Link className={styles.link} to="../sign-up">

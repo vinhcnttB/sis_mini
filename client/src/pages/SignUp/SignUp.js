@@ -136,10 +136,6 @@ const SignUp = () => {
             >
               Đăng ký
             </button>
-            <div className={styles.note}>
-              Trang web này thực hiện cho môn học Phát triển ứng dụng Web nâng
-              cao.
-            </div>
             <div className={styles.info}>
               Đã có tài khoản?{" "}
               <Link className={styles.link} to="../sign-in">

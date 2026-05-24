@@ -97,10 +97,6 @@ const ResetPassword = () => {
                         >
                             Xác nhận
                         </button>
-                        <div className={styles.note}>
-                            Trang web này thực hiện cho môn học Phát triển ứng
-                            dụng Web nâng cao.
-                        </div>
                     </div>
                 </form>
             </div>
