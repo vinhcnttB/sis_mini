@@ -1,0 +1,7 @@
+.userContainer{
+    padding: 24px 30px;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap:6px;
+}

@@ -1,0 +1,241 @@
+@import ../../styles/helpers
+
+.editScreen
+    width: 100%
+    min-height: calc(100vh - 90px)
+    display: flex
+    align-items: center
+    justify-content: center
+    padding: 40px 20px
+    user-select: none
+    background: transparent
+    +m
+        padding: 20px 10px
+
+.editContainer
+    width: 100%
+    max-width: 540px
+    background-color: #FFFFFF
+    border-radius: 24px
+    box-shadow: 0px 40px 64px -32px rgba(15, 15, 15, 0.1)
+    border: 1px solid $n3
+    overflow: hidden
+    position: relative
+    transition: all .3s ease
+    +dark
+        background: #1A1D1F
+        border-color: $n6
+        color: #FFFFFF
+    
+    &.adminView
+        max-width: 100%
+        background: transparent
+        border: none
+        box-shadow: none
+        border-radius: 0
+        overflow: visible
+        .profileBanner
+            border-radius: 12px
+        .avatarWrapper
+            border-color: #FFFFFF
+            background: #FFFFFF
+            +dark
+                border-color: #1A1D1F
+                background: #1A1D1F
+        .profileHeader,
+        .profileMeta,
+        .editForm
+            padding-left: 0
+            padding-right: 0
+
+.profileBanner
+    height: 120px
+    background: linear-gradient(135deg, $p1 0%, $p2 100%)
+    position: relative
+
+.profileHeader
+    display: flex
+    align-items: flex-end
+    padding: 0 24px
+    margin-top: -45px
+    position: relative
+    z-index: 2
+
+.avatarWrapper
+    width: 90px
+    height: 90px
+    border-radius: 50%
+    border: 4px solid #FFFFFF
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.1)
+    background: #FFFFFF
+    overflow: hidden
+    +dark
+        border-color: #1A1D1F
+        background: #1A1D1F
+
+.avatarImage
+    width: 100%
+    height: 100%
+    object-fit: cover
+
+.actionContainer
+    margin-bottom: 0
+
+.profileMeta
+    display: flex
+    justify-content: space-between
+    align-items: center
+    padding: 16px 24px 8px
+    border-bottom: 1px solid $n3
+    +m
+        flex-direction: column
+        align-items: flex-start
+        gap: 12px
+    +dark
+        border-color: $n6
+
+.profileName
+    font-size: 22px
+    font-weight: 700
+    color: $n7
+    margin: 0 0 6px
+    +dark
+        color: $n1
+
+.badgeWrapper
+    display: flex
+    gap: 8px
+
+.badge
+    padding: 4px 12px
+    border-radius: 8px
+    font-size: 11px
+    font-weight: 700
+    display: inline-block
+    text-transform: uppercase
+    letter-spacing: 0.5px
+
+.badgeAdmin
+    background: rgba(239, 68, 68, 0.15)
+    color: #ef4444
+
+.badgeTeacher
+    background: rgba(147, 51, 234, 0.15)
+    color: #9333ea
+
+.badgeStudent
+    background: rgba(59, 130, 246, 0.15)
+    color: #3b82f6
+
+.editForm
+    padding: 24px
+
+.editContext
+    display: flex
+    flex-direction: column
+
+.formField
+    margin-bottom: 16px
+    label
+        display: block
+        margin-bottom: 8px
+        font-size: 13px
+        font-weight: 700
+        color: $n4
+        text-transform: uppercase
+        letter-spacing: 0.5px
+        +dark
+            color: $n3
+    :global(.form-control)
+        width: 100%
+        height: 48px
+        padding: 0 16px
+        border-radius: 12px
+        border: 2px solid $n3
+        background: $n2
+        color: $n7
+        font-size: 14px
+        font-weight: 600
+        transition: all .2s
+        outline: none
+        box-shadow: none
+        +dark
+            border-color: $n6
+            background: $n6
+            color: $n1
+        &:focus
+            border-color: $p1
+            background: $n1
+            +dark
+                border-color: $p1
+                background: $n7
+        &:disabled
+            background: $n3
+            border-color: $n3
+            color: $n4
+            cursor: not-allowed
+            +dark
+                background: #151718
+                border-color: #151718
+                color: $n5
+    :global(.text-danger)
+        margin-top: 6px
+        font-size: 12px
+        font-weight: 600
+        color: $p3
+
+.formInputLine
+    display: flex
+    gap: 16px
+    +m
+        flex-direction: column
+        gap: 0
+
+.halfWidth
+    flex: 1
+
+.editBtn,
+.backBtn
+    display: inline-flex
+    align-items: center
+    justify-content: center
+    height: 38px
+    padding: 0 16px
+    border-radius: 12px
+    font-size: 13px
+    font-weight: 700
+    cursor: pointer
+    transition: all .2s ease
+    border: 2px solid $n3
+    background: transparent
+    color: $n7
+    outline: none
+    +dark
+        border-color: $n6
+        color: $n1
+    &:hover
+        border-color: $p1
+        color: $p1
+        background: rgba($p1, 0.05)
+        +dark
+            border-color: $p1
+            color: $p1
+
+.submitBtn
+    width: 100%
+    height: 48px
+    border: none
+    outline: none
+    border-radius: 12px
+    background: $grad-p1
+    color: $n1
+    font-size: 15px
+    font-weight: 700
+    margin-top: 16px
+    cursor: pointer
+    transition: all .2s ease
+    &:hover
+        box-shadow: 0px 8px 16px rgba($p1, 0.25)
+        transform: translateY(-1px)
+    &:active
+        transform: translateY(1px)

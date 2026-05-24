@@ -1,0 +1,413 @@
+@import ../../styles/helpers
+
+.homeScreen
+    padding: 24px 30px
+    display: flex
+    flex-direction: column
+    gap: 32px
+    +m
+        padding: 16px 20px
+        gap: 24px
+
+// Upload Card Section
+.uploadCard
+    background: $n2
+    border-radius: 16px
+    border: 1px solid $n3
+    padding: 24px
+    display: flex
+    flex-direction: column
+    gap: 16px
+    +dark
+        background: #1e2124
+        border-color: $n6
+
+.uploadHeader
+    display: flex
+    align-items: center
+    gap: 10px
+    color: $n7
+    svg
+        fill: $p1
+    +dark
+        color: $n1
+
+.uploadTitle
+    font-size: 16px
+    font-weight: 700
+
+.uploadBody
+    display: flex
+    flex-direction: column
+    gap: 12px
+
+.fileLabel
+    font-size: 14px
+    color: $n4
+
+.fileInputWrapper
+    display: flex
+    align-items: center
+    gap: 16px
+    flex-wrap: wrap
+
+.fileInput
+    flex-grow: 1
+    max-width: 400px
+    background: $n1
+    border: 1px solid $n3
+    padding: 8px 16px
+    border-radius: 12px
+    outline: none
+    +dark
+        background: $n7
+        border-color: $n6
+        color: $n3
+
+.uploadBtn
+    display: flex
+    align-items: center
+    gap: 8px
+    svg
+        fill: $n1
+
+.downloadBtn
+    display: flex
+    align-items: center
+    gap: 8px
+    svg
+        fill: $n7
+    +dark
+        svg
+            fill: $n1
+
+// Control Bar: Search & Filters
+.controlBar
+    display: flex
+    justify-content: space-between
+    align-items: center
+    gap: 20px
+    flex-wrap: wrap
+    +t
+        flex-direction: column
+        align-items: stretch
+
+.searchBox
+    flex: 1
+    max-width: 400px
+    +t
+        max-width: 100%
+
+.filters
+    display: flex
+    align-items: center
+    gap: 16px
+    flex-wrap: wrap
+    +t
+        justify-content: flex-start
+
+.selectWrapper
+    position: relative
+    +m
+        flex: 1
+
+.select
+    appearance: none
+    background: $n2 url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%236F767E%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E") no-repeat right 16px top 50%/10px auto
+    padding: 12px 40px 12px 16px
+    border: 1px solid $n3
+    border-radius: 12px
+    font-size: 14px
+    font-weight: 600
+    color: $n4
+    min-width: 160px
+    outline: none
+    cursor: pointer
+    transition: border-color .2s
+    +dark
+        background-color: $n6
+        border-color: $n5
+        color: $n1
+    &:focus
+        border-color: $p1
+
+// View Toggle Buttons
+.viewToggle
+    display: flex
+    background: $n2
+    border: 1px solid $n3
+    border-radius: 12px
+    padding: 4px
+    gap: 4px
+    +dark
+        background: $n6
+        border-color: $n5
+
+.toggleBtn
+    background: none
+    border: none
+    padding: 6px
+    border-radius: 8px
+    cursor: pointer
+    display: flex
+    align-items: center
+    justify-content: center
+    color: $n4
+    transition: all .2s
+    svg
+        fill: $n4
+    &:hover
+        color: $n7
+        svg
+            fill: $n7
+        +dark
+            color: $n1
+            svg
+                fill: $n1
+    &.active
+        background: $n1
+        color: $p1
+        box-shadow: 0 4px 8px rgba(0,0,0,0.05)
+        svg
+            fill: $p1
+        +dark
+            background: $n7
+
+// List Header Section
+.listHeader
+    display: flex
+    justify-content: space-between
+    align-items: center
+    padding-bottom: 8px
+    border-bottom: 1px solid $n3
+    +dark
+        border-color: $n6
+
+.listTitle
+    font-size: 20px
+    font-weight: 700
+    color: $n7
+    +dark
+        color: $n1
+
+// Table View
+.tableWrapper
+    background: $n1
+    border-radius: 16px
+    border: 1px solid $n3
+    overflow-x: auto
+    +dark
+        background: #1c1d1f
+        border-color: $n6
+
+.table
+    width: 100%
+    border-collapse: collapse
+    text-align: left
+
+.th
+    padding: 16px 24px
+    font-size: 13px
+    font-weight: 700
+    color: $n4
+    text-transform: uppercase
+    letter-spacing: 0.5px
+    border-bottom: 1px solid $n3
+    +dark
+        border-color: $n6
+
+.tr
+    border-bottom: 1px solid $n3
+    transition: background-color .2s
+    +dark
+        border-color: $n6
+    &:hover
+        background: $n2
+        +dark
+            background: $n6
+
+.td
+    padding: 16px 24px
+    font-size: 14px
+    color: $n6
+    vertical-align: middle
+    +dark
+        color: $n3
+
+.userCell
+    display: flex
+    align-items: center
+    gap: 12px
+
+.tableAvatar
+    position: relative
+    width: 36px
+    height: 36px
+    border-radius: 50%
+    img
+        width: 100%
+        height: 100%
+        object-fit: cover
+        border-radius: 50%
+
+.statusDot
+    position: absolute
+    bottom: -2px
+    right: -2px
+    width: 12px
+    height: 12px
+    border-radius: 50%
+    border: 2px solid $n1
+    +dark
+        border-color: #1c1d1f
+    &.online
+        background: #10b981
+    &.offline
+        background: #ef4444
+
+.userName
+    font-weight: 600
+    color: $n7
+    +dark
+        color: $n1
+
+.studentId
+    font-family: monospace
+    font-size: 14px
+    font-weight: 600
+    color: $n7
+    +dark
+        color: $n1
+
+.noStudentId
+    color: $n4
+    font-style: italic
+    font-size: 13px
+
+// Badges Styling
+.badge
+    padding: 4px 10px
+    border-radius: 8px
+    font-size: 12px
+    font-weight: 700
+    display: inline-block
+
+.badgeAdmin
+    background: rgba(239, 68, 68, 0.15)
+    color: #ef4444
+
+.badgeTeacher
+    background: rgba(147, 51, 234, 0.15)
+    color: #9333ea
+
+.badgeStudent
+    background: rgba(59, 130, 246, 0.15)
+    color: #3b82f6
+
+.statusText
+    font-weight: 600
+    font-size: 13px
+
+.onlineText
+    color: #10b981
+
+.offlineText
+    color: #ef4444
+
+.statusBadge
+    padding: 4px 8px
+    border-radius: 6px
+    font-size: 12px
+    font-weight: 700
+    display: inline-block
+    text-transform: uppercase
+
+// Action Buttons
+.actions
+    display: flex
+    gap: 8px
+    justify-content: center
+
+.actionBtn
+    padding: 6px 12px
+    height: auto
+    font-size: 13px
+    font-weight: 600
+
+// Grid View (Card container)
+.userContainer
+    display: grid
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr))
+    gap: 24px
+
+// Pagination Footer
+.pagination
+    display: flex
+    justify-content: space-between
+    align-items: center
+    padding: 16px 0
+    border-top: 1px solid $n3
+    +dark
+        border-color: $n6
+    +m
+        flex-direction: column
+        gap: 16px
+
+.pageBtn
+    display: flex
+    align-items: center
+    gap: 8px
+    padding: 10px 16px
+    background: $n2
+    border: 1px solid $n3
+    border-radius: 12px
+    font-weight: 600
+    color: $n6
+    cursor: pointer
+    transition: all .2s
+    svg
+        fill: $n6
+    &:hover:not(.disabled)
+        background: $n3
+        color: $n7
+        svg
+            fill: $n7
+        +dark
+            background: $n5
+            color: $n1
+            svg
+                fill: $n1
+    &.disabled
+        opacity: 0.5
+        cursor: not-allowed
+    +dark
+        background: $n6
+        border-color: $n5
+        color: $n3
+        svg
+            fill: $n3
+
+.pageInfo
+    font-size: 14px
+    color: $n4
+    strong
+        color: $n7
+        +dark
+            color: $n1
+
+.noData
+    text-align: center
+    padding: 48px
+    background: $n2
+    border-radius: 16px
+    color: $n4
+    font-size: 15px
+    font-style: italic
+    border: 1px dashed $n3
+    +dark
+        background: #1c1d1f
+        border-color: $n6
+
+.outer
+    max-width: 600px !important
+    width: 100%

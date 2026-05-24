@@ -1,0 +1,25 @@
+export enum ROLES {
+  ADMIN = '9b18fbd22d07cdb410d015b4',
+  USER = '97bc64ef328c22ca3a91b642',
+  TEACHER = '22d89fb9b72cae80471abce2',
+  STUDENT = '0c9831eefcebfaf65307082a',
+}
+export enum MAIL_TEMPLATE_ID {
+  REGISTER = 'd-db6bbb0802d64247a96775213bf23c48',
+}
+
+export enum ASSIGNMENT_STATUS {
+  NOT_SUBMITTED = 'NOT_SUBMITTED', // chưa nộp
+  SUBMITTED = 'SUBMITTED', // đã nộp
+  LATE = 'LATE', // nộp muộn
+  GRADED = 'GRADED', // đã chấm điểm
+  REQUESTED_REVIEW = 'REQUESTED_REVIEW', // phúc khảo
+  DONE_REQUESTED_REVIEW = 'DONE_REQUESTED_REVIEW', // đã phúc khảo
+  ACCEPT_REQUESTED_REVIEW = 'ACCEPT_REQUESTED_REVIEW', // đã phúc khảo
+  DENIED_REQUESTED_REVIEW = 'DENIED_REQUESTED_REVIEW', // đã phúc khảo
+}
+
+export enum REQUESTED_REVIEW_STATUS {
+  OPENED = 'OPENED',
+  CLOSED = 'CLOSED',
+}

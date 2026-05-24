@@ -1,0 +1,283 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model users {
+  id                                 String                               @id @default(auto()) @map("_id") @db.ObjectId
+  email                              String?                              @unique
+  encryptedPassword                  String                               @map(name: "encrypted_password")
+  firstName                          String?                              @map(name: "first_name")
+  lastName                           String?                              @map(name: "last_name")
+  provider                           String?
+  gender                             String?
+  roleId                             String?                              @map(name: "role_id") @db.ObjectId
+  address                            String?
+  avatar                             String?
+  uniqueId                           String?                              @unique @map(name: "unique_id")
+  emailVerifiedAt                    DateTime?                            @map(name: "email_verified_at")
+  emailVerified                      Boolean?                             @default(false) @map(name: "email_verified")
+  status                             Boolean?
+  isBan                              Boolean?                             @default(false) @map("is_ban")
+  isDisabled                         Boolean                              @default(false) @map(name: "is_disabled")
+  isDeleted                          Boolean                              @default(false) @map(name: "is_deleted")
+  deletedAt                          DateTime?                            @map(name: "deleted_at")
+  role                               roles?                               @relation(fields: [roleId], references: [id])
+  createdAt                          DateTime                             @default(now()) @map(name: "created_at")
+  updatedAt                          DateTime                             @default(now()) @updatedAt @map(name: "updated_at")
+  classStudents                      classStudents[]
+  classTeachers                      classTeachers[]
+  studentAssignments                 studentAssignments[]
+  assignmentsScoreHistories          assignmentsScoreHistories[]
+  studentRequestedReviews            studentRequestedReviews[]
+  studentRequestedReviewConversation studentRequestedReviewConversation[]
+  notifications                      notifications[]
+  assignments                        assignments[]
+  attendanceDetails                  attendanceDetails[]
+}
+
+model roles {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  name      String?
+  createdAt DateTime @default(now()) @map(name: "created_at")
+  updatedAt DateTime @default(now()) @updatedAt @map(name: "updated_at")
+  users     users[]
+}
+
+model classes {
+  id                   String                 @id @default(auto()) @map("_id") @db.ObjectId
+  name                 String?
+  uniqueCode           String?                @unique @map(name: "unique_code")
+  maximumStudents      Int?                   @map(name: "maximum_students")
+  description          String?
+  isDisabled           Boolean                @default(false) @map(name: "is_disabled")
+  disabledAt           DateTime?              @map(name: "disabled_at")
+  createdAt            DateTime               @default(now()) @map(name: "created_at")
+  updatedAt            DateTime               @default(now()) @updatedAt @map(name: "updated_at")
+  classStudents        classStudents[]
+  classTeachers        classTeachers[]
+  classLinkInvitations classLinkInvitations[]
+  assignments          assignments[]
+  grades               grades[]
+  schedules            schedules[]
+  attendance           attendance[]
+}
+
+model grades {
+  id          String       @id @default(auto()) @map("_id") @db.ObjectId
+  name        String?
+  percentage  Int?
+  status      String?      @default("OPEN")
+  classId     String?      @map(name: "class_id") @db.ObjectId
+  createdAt   DateTime     @default(now()) @map(name: "created_at")
+  updatedAt   DateTime     @default(now()) @updatedAt @map(name: "updated_at")
+  classes     classes?     @relation(fields: [classId], references: [id])
+  assignments assignments?
+}
+
+model assignments {
+  id                        String                      @id @default(auto()) @map("_id") @db.ObjectId
+  classId                   String?                     @map(name: "class_id") @db.ObjectId
+  name                      String?
+  gradeId                   String?                     @unique @map(name: "grade_id") @db.ObjectId
+  teacherId                 String?                     @map(name: "creator_id") @db.ObjectId
+  description               String?
+  status                    String?                     @default("OPEN")
+  metadata                  String?
+  publishedAt               DateTime?                   @default(now()) @map(name: "published_at")
+  dueDate                   DateTime?                   @map(name: "due_date")
+  disabledAt                DateTime?                   @map(name: "disabled_at")
+  isDisabled                Boolean                     @default(false) @map(name: "is_disabled")
+  createdAt                 DateTime                    @default(now()) @map(name: "created_at")
+  updatedAt                 DateTime                    @default(now()) @updatedAt @map(name: "updated_at")
+  classes                   classes?                    @relation(fields: [classId], references: [id])
+  grades                    grades?                     @relation(fields: [gradeId], references: [id])
+  teacher                   users?                      @relation(fields: [teacherId], references: [id])
+  studentAssignments        studentAssignments[]
+  assignmentsScoreHistories assignmentsScoreHistories[]
+  studentRequestedReviews   studentRequestedReviews[]
+
+  @@map("assignments")
+}
+
+model studentAssignments {
+  id                           String                         @id @default(auto()) @map("_id") @db.ObjectId
+  studentId                    String?                        @map(name: "student_id") @db.ObjectId
+  assignmentId                 String?                        @map(name: "assignment_id") @db.ObjectId
+  status                       String?
+  score                        Float?
+  description                  String?
+  metadata                     String?
+  createdAt                    DateTime                       @default(now()) @map(name: "created_at")
+  updatedAt                    DateTime                       @default(now()) @updatedAt @map(name: "updated_at")
+  students                     users?                         @relation(fields: [studentId], references: [id])
+  assignments                  assignments?                   @relation(fields: [assignmentId], references: [id])
+  studentAssignmentSubmissions studentAssignmentSubmissions[]
+  studentRequestedReviews      studentRequestedReviews[]
+
+  @@map("student_assignments")
+}
+
+model studentRequestedReviews {
+  id                                 String                               @id @default(auto()) @map("_id") @db.ObjectId
+  studentAssignmentId                String?                              @map(name: "student_assignment_id") @db.ObjectId
+  metadata                           String?
+  status                             String?
+  expectedScore                      Float?                               @map(name: "expected_score")
+  actualScore                        Float?                               @map(name: "actual_score")
+  comment                            String?
+  assignmentId                       String?                              @map(name: "assignment_id") @db.ObjectId
+  studentId                          String?                              @map(name: "student_id") @db.ObjectId
+  createdAt                          DateTime                             @default(now()) @map(name: "created_at")
+  updatedAt                          DateTime                             @default(now()) @updatedAt @map(name: "updated_at")
+  studentAssignments                 studentAssignments?                  @relation(fields: [studentAssignmentId], references: [id])
+  students                           users?                               @relation(fields: [studentId], references: [id])
+  assignments                        assignments?                         @relation(fields: [assignmentId], references: [id])
+  studentRequestedReviewConversation studentRequestedReviewConversation[]
+
+  @@map("student_requested_reviews")
+}
+
+model studentRequestedReviewConversation {
+  id                 String                   @id @default(auto()) @map("_id") @db.ObjectId
+  studentRequestedId String?                  @map(name: "student_requested_id") @db.ObjectId
+  metadata           String?
+  message            String?
+  userId             String?                  @map(name: "user_id") @db.ObjectId
+  createdAt          DateTime                 @default(now()) @map(name: "created_at")
+  updatedAt          DateTime                 @default(now()) @updatedAt @map(name: "updated_at")
+  studentRequested   studentRequestedReviews? @relation(fields: [studentRequestedId], references: [id])
+  users              users?                   @relation(fields: [userId], references: [id])
+
+  @@map("student_requested_review_conversation")
+}
+
+model assignmentsScoreHistories {
+  id           String       @id @default(auto()) @map("_id") @db.ObjectId
+  studentId    String?      @map(name: "student_id") @db.ObjectId
+  assignmentId String?      @map(name: "assignment_id") @db.ObjectId
+  score        Float?
+  metadata     String?
+  createdAt    DateTime     @default(now()) @map(name: "created_at")
+  updatedAt    DateTime     @default(now()) @updatedAt @map(name: "updated_at")
+  students     users?       @relation(fields: [studentId], references: [id])
+  assignments  assignments? @relation(fields: [assignmentId], references: [id])
+
+  @@map("assignments_score_histories")
+}
+
+model studentAssignmentSubmissions {
+  id                  String              @id @default(auto()) @map("_id") @db.ObjectId
+  studentAssignmentId String?             @map(name: "student_assignment_id") @db.ObjectId
+  metadata            String?
+  createdAt           DateTime            @default(now()) @map(name: "created_at")
+  updatedAt           DateTime            @default(now()) @updatedAt @map(name: "updated_at")
+  studentAssignments  studentAssignments? @relation(fields: [studentAssignmentId], references: [id])
+
+  @@map("student_assignment_submissions")
+}
+
+model classLinkInvitations {
+  id        String    @id @default(auto()) @map("_id") @db.ObjectId
+  classId   String?   @map(name: "class_id") @db.ObjectId
+  expiredAt DateTime? @map(name: "expired_at")
+  createdAt DateTime  @default(now()) @map(name: "created_at")
+  updatedAt DateTime  @default(now()) @updatedAt @map(name: "updated_at")
+  classes   classes?  @relation(fields: [classId], references: [id])
+
+  @@map("class_link_invitations")
+}
+
+model classStudents {
+  id         String    @id @default(auto()) @map("_id") @db.ObjectId
+  classId    String?   @map(name: "class_id") @db.ObjectId
+  studentId  String?   @map(name: "student_id") @db.ObjectId
+  isDisabled Boolean   @default(false) @map(name: "is_disabled")
+  disabledAt DateTime? @map(name: "disabled_at")
+  createdAt  DateTime  @default(now()) @map(name: "created_at")
+  updatedAt  DateTime  @default(now()) @updatedAt @map(name: "updated_at")
+  classes    classes?  @relation(fields: [classId], references: [id])
+  students   users?    @relation(fields: [studentId], references: [id])
+
+  @@map("class_students")
+}
+
+model classTeachers {
+  id         String    @id @default(auto()) @map("_id") @db.ObjectId
+  classId    String?   @map(name: "class_id") @db.ObjectId
+  teacherId  String?   @map(name: "teacher_id") @db.ObjectId
+  isCreator  Boolean   @default(false) @map(name: "is_creator")
+  isDisabled Boolean   @default(false) @map(name: "is_disabled")
+  disabledAt DateTime? @map(name: "disabled_at")
+  createdAt  DateTime  @default(now()) @map(name: "created_at")
+  updatedAt  DateTime  @default(now()) @updatedAt @map(name: "updated_at")
+  classes    classes?  @relation(fields: [classId], references: [id])
+  teachers   users?    @relation(fields: [teacherId], references: [id])
+
+  @@map("class_teachers")
+}
+
+model notifications {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  userId    String   @db.ObjectId
+  title     String
+  content   String
+  type      String
+  classId   String?
+  token     String?
+  accepted  Boolean? @default(false)
+  isRead    Boolean  @default(false)
+  createdAt DateTime @default(now()) @map(name: "created_at")
+
+  user      users    @relation(fields: [userId], references: [id])
+}
+
+model schedules {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  classId   String   @map("class_id") @db.ObjectId
+  dayOfWeek Int      // 1: Chủ Nhật, 2-7: Thứ 2 đến Thứ 7
+  startTime String   // Định dạng "HH:mm"
+  endTime   String   // Định dạng "HH:mm"
+  room      String?  // Phòng học
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @default(now()) @updatedAt @map("updated_at")
+  classes   classes  @relation(fields: [classId], references: [id])
+
+  @@map("schedules")
+}
+
+model attendance {
+  id                String             @id @default(auto()) @map("_id") @db.ObjectId
+  classId           String             @map("class_id") @db.ObjectId
+  date              DateTime           // Ngày điểm danh
+  code              String?            // Mã điểm danh 4 chữ số
+  isOpen            Boolean            @default(false) @map("is_open")
+  createdAt         DateTime           @default(now()) @map("created_at")
+  updatedAt         DateTime           @default(now()) @updatedAt @map("updated_at")
+  classes           classes            @relation(fields: [classId], references: [id])
+  attendanceDetails attendanceDetails[]
+
+  @@map("attendance")
+}
+
+model attendanceDetails {
+  id           String     @id @default(auto()) @map("_id") @db.ObjectId
+  attendanceId String     @map("attendance_id") @db.ObjectId
+  studentId    String     @map("student_id") @db.ObjectId
+  status       String     // PRESENT, ABSENT, LATE, EXCUSED
+  remark       String?    // Ghi chú thêm
+  createdAt    DateTime   @default(now()) @map("created_at")
+  updatedAt    DateTime   @default(now()) @updatedAt @map("updated_at")
+  attendance   attendance @relation(fields: [attendanceId], references: [id])
+  students     users      @relation(fields: [studentId], references: [id])
+
+  @@map("attendance_details")
+}
+

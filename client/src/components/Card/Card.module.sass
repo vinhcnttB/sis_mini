@@ -1,0 +1,34 @@
+@import ../../styles/helpers
+
+.card
+    position: relative
+    padding: 24px
+    background: $n1
+    border-radius: 16px
+    box-shadow: $shadow-md
+    border: 1px solid $n3
+    transition: all 0.3s ease
+    &:hover
+        box-shadow: $shadow-lg
+        transform: translateY(-2px)
+    +m
+        padding: 16px
+    +dark
+        background: $n7
+        border-color: $n6
+        box-shadow: $shadow-glass-dark
+        &:hover
+            box-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.4)
+
+.head
+    display: flex
+    align-items: center
+    min-height: 40px
+    margin-bottom: 32px
+    +m
+        margin-bottom: 24px
+
+.title
+    margin-right: auto
+    +m
+        line-height: 40px

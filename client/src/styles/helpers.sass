@@ -1,0 +1,226 @@
+// media queries
+=w
+    @media only screen and (max-width: "1419px")
+        @content
+=x
+    @media only screen and (max-width: "1339px")
+        @content
+=d
+    @media only screen and (max-width: "1259px")
+        @content
+=t
+    @media only screen and (max-width: "1023px")
+        @content
+=m
+    @media only screen and (max-width: "767px")
+        @content
+=a
+    @media only screen and (max-width: "639px")
+        @content
+=s
+    @media only screen and (max-width: "474px")
+        @content
+
+// fonts
+=inter
+    font-family: 'Inter', sans-serif
+
+// colors
+// Premium Vibrant Colors
+$p1: #3B82F6 // Modern Blue
+$p2: #10B981 // Modern Green
+$p3: #EF4444 // Modern Red
+$p4: #8B5CF6 // Modern Purple
+$p5: #F59E0B // Modern Orange/Yellow
+
+$s1: #FFEDD5
+$s2: #EDE9FE
+$s3: #DBEAFE
+$s4: #D1FAE5
+$s5: #FEF3C7
+
+// Neutrals
+$n: #FFFFFF
+$n1: #F8FAFC // Slate-50
+$n2: #F1F5F9 // Slate-100
+$n3: #E2E8F0 // Slate-200
+$n4: #64748B // Slate-500
+$n5: #334155 // Slate-700
+$n6: #1E293B // Slate-800
+$n7: #0F172A // Slate-900
+$n8: #020617 // Slate-950
+
+$shades1: #94A3B8
+$shades2: #64748B
+$shades3: rgba(100, 116, 139, 0.4)
+$shades4: rgba(2, 6, 23, 0.6)
+
+// Gradients
+$grad-p1: linear-gradient(135deg, #3B82F6 0%, #2563EB 100%)
+$grad-p2: linear-gradient(135deg, #10B981 0%, #059669 100%)
+$grad-p4: linear-gradient(135deg, #8B5CF6 0%, #6D28D9 100%)
+
+// Shadows
+$shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05)
+$shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)
+$shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)
+$shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)
+$shadow-glass: 0 8px 32px 0 rgba(31, 38, 135, 0.07)
+$shadow-glass-dark: 0 8px 32px 0 rgba(0, 0, 0, 0.3)
+
+// Glassmorphism Mixins
+=glass
+    background: rgba(255, 255, 255, 0.7)
+    backdrop-filter: blur(12px)
+    -webkit-backdrop-filter: blur(12px)
+    border: 1px solid rgba(255, 255, 255, 0.3)
+
+=glass-dark
+    background: rgba(15, 23, 42, 0.7)
+    backdrop-filter: blur(12px)
+    -webkit-backdrop-filter: blur(12px)
+    border: 1px solid rgba(255, 255, 255, 0.05)
+
+// typography
+=title1-s
+    font-size: 20px
+    font-weight: 600
+    line-height: (32/20)
+    letter-spacing: -.02em
+    +m
+        font-size: 18px
+
+=title1-m
+    font-size: 20px
+    font-weight: 500
+    line-height: (32/20)
+    letter-spacing: -.02em
+    +m
+        font-size: 18px
+
+=title2
+    font-size: 18px
+    line-height: (24/18)
+    letter-spacing: -0.02em
+
+=base1-s
+    font-size: 15px
+    font-weight: 600
+    line-height: (24/15)
+
+=base1-b
+    font-size: 15px
+    font-weight: 700
+    line-height: (24/15)
+
+=base2
+    font-size: 14px
+    font-weight: 600
+    line-height: (24/14)
+
+=body1-m
+    font-size: 15px
+    font-weight: 500
+    line-height: (24/15)
+    letter-spacing: -.015em
+
+=body1-s
+    font-size: 15px
+    font-weight: 600
+    line-height: (24/15)
+    letter-spacing: -.015em
+
+=body2-s
+    font-size: 14px
+    font-weight: 600
+    line-height: (24/14)
+
+=caption1
+    font-size: 13px
+    font-weight: 600
+    line-height: (16/13)
+
+=caption1-m
+    font-size: 13px
+    font-weight: 500
+    line-height: (16/13)
+
+=caption2
+    font-size: 12px
+    font-weight: 700
+    line-height: (16/12)
+
+=caption2-m
+    font-size: 12px
+    font-weight: 500
+    line-height: 1
+
+=button1
+    font-size: 15px
+    font-weight: 700
+    line-height: (24/15)
+
+=button2
+    font-size: 13px
+    font-weight: 700
+    line-height: (24/13)
+    
+//triangle
+=arr($width, $height, $bg, $direction)
+    width: 0px
+    height: 0px
+    border-style: solid
+    @if $direction == t
+        border-width: 0 $width / 2 + px $height + px $width / 2 + px
+        border-color: transparent transparent $bg transparent
+    @if $direction == r
+        border-width: $height / 2 + px 0 $height / 2 + px $width + px
+        border-color: transparent transparent transparent $bg
+    @if $direction == b
+        border-width: $height + px $width / 2 + px 0 $width / 2 + px
+        border-color: $bg transparent transparent transparent
+    @if $direction == l
+        border-width: $height / 2 + px $width + px $height / 2 + px 0
+        border-color: transparent $bg transparent transparent
+    @if $direction == tl
+        border-width: $height + px $width + px 0 0
+        border-color: $bg transparent transparent transparent
+    @if $direction == tr
+        border-width: 0 $width + px $height + px 0
+        border-color: transparent $bg transparent transparent
+    @if $direction == br
+        border-width: 0 0 $height + px $width + px
+        border-color: transparent transparent $bg transparent
+    @if $direction == bl
+        border-width: $width + px 0 0 $height + px
+        border-color: transparent transparent transparent $bg
+// example
+// +arr(500,50, #000, l)
+// +arr(500,50, #000, bl)
+
+// placeholder
+=placeholder
+    &::placeholder
+        @content
+
+// media query width
+=r($width)
+    @media only screen and (max-width: $width+ "px")
+        @content
+
+=rmin($width)
+    @media only screen and (min-width: $width+ "px")
+        @content
+
+// theme
+=dark
+    @at-root :global(.dark-mode) &
+        @content
+
+=dark-body
+    @at-root .dark-mode
+        @content
+
+=dark-common
+    @at-root .dark-mode &
+        @content

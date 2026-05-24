@@ -1,0 +1,37 @@
+.landingPage {
+    width: 100vw;
+    height: 100vh;
+    background: url("../../../public/assets/landing-page-background.jpg");
+    background-size: cover;
+    user-select: none;
+}
+
+.landingPageContext{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+.landingPageText{
+    text-align: center;
+    font-family: 'Inter',sans-serif;
+    font-weight: 700;
+    font-size: 20px;
+    color:#FFFFFF;
+    text-shadow: 2px 2px 5px #000000;
+}
+
+.button{
+    border:none;
+    outline: none;
+    padding: 8px 32px;
+    margin:10px 2px;
+    border-radius: 8px;
+    font-family: 'Inter',sans-serif;
+    font-weight: 700;
+    font-size: 20px;
+    background-color: #5b53da;
+    color:#FFFFFF;
+}

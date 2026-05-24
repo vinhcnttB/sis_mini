@@ -1,0 +1,94 @@
+@import ../../styles/helpers
+
+.container
+    display: inline-flex
+    align-items: center
+    gap: 12px
+    padding: 8px 16px
+    border-radius: 12px
+    font-size: 14px
+    font-weight: 600
+    backdrop-filter: blur(8px)
+    -webkit-backdrop-filter: blur(8px)
+    transition: all 0.3s ease
+    margin-top: 8px
+    border: 1px solid transparent
+
+.iconWrapper
+    display: flex
+    align-items: center
+    justify-content: center
+    width: 24px
+    height: 24px
+    border-radius: 50%
+    background: rgba(255, 255, 255, 0.1)
+
+.timerText
+    font-variant-numeric: tabular-nums
+    font-feature-settings: "tnum"
+    letter-spacing: 0.5px
+    display: flex
+    gap: 4px
+
+.timeUnit
+    display: inline-block
+    min-width: 20px
+    text-align: center
+
+.label
+    font-size: 12px
+    opacity: 0.8
+    margin-right: 4px
+
+// Trạng thái bình thường (> 24 giờ)
+.normal
+    background-color: rgba(34, 197, 94, 0.1)
+    color: #22c55e
+    border-color: rgba(34, 197, 94, 0.25)
+    box-shadow: 0 4px 12px rgba(34, 197, 94, 0.05)
+    
+    .iconWrapper
+        svg
+            fill: #22c55e
+
+// Trạng thái cảnh báo khẩn cấp (< 24 giờ)
+.warning
+    background-color: rgba(239, 68, 68, 0.12)
+    color: #ef4444
+    border-color: rgba(239, 68, 68, 0.3)
+    animation: pulse 2s infinite ease-in-out, blink 1.5s infinite ease-in-out
+    box-shadow: 0 4px 16px rgba(239, 68, 68, 0.15)
+
+    .iconWrapper
+        background: rgba(239, 68, 68, 0.2)
+        svg
+            fill: #ef4444
+
+// Trạng thái đã hết hạn
+.expired
+    background-color: rgba(107, 114, 128, 0.1)
+    color: #9ca3af
+    border-color: rgba(107, 114, 128, 0.2)
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02)
+
+    .iconWrapper
+        svg
+            fill: #9ca3af
+
+// Hiệu ứng pulse bóng mờ tỏa ra ngoài
+@keyframes pulse
+    0%
+        box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.4)
+    70%
+        box-shadow: 0 0 0 8px rgba(239, 68, 68, 0)
+    100%
+        box-shadow: 0 0 0 0 rgba(239, 68, 68, 0)
+
+// Hiệu ứng nhấp nháy chữ nhẹ nhàng
+@keyframes blink
+    0%
+        opacity: 0.9
+    50%
+        opacity: 1.0
+    100%
+        opacity: 0.9

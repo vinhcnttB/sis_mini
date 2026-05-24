@@ -1,0 +1,6 @@
+.authLayout{
+    width: 100vw;
+    height: 100vh;
+    background: url("../../../public/assets/auth-background.jpg");
+    background-size: cover;
+}
