@@ -56,6 +56,12 @@ jobs:
           APP_FB_SECRET: dummy
           NODE_ENV: production
 
+      - name: Deploy to Render
+        if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'
+        run: |
+          curl -X POST "${{ secrets.RENDER_DEPLOY_HOOK }}"
+          echo "✅ Deployed to https://sis-mini.onrender.com"
+
   frontend:
     name: Frontend Build & Test
     runs-on: ubuntu-latest
