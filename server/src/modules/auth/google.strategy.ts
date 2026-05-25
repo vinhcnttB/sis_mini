@@ -64,6 +64,7 @@ export class GoogleStrategy extends PassportStrategy(Strategy, 'google') {
         ? { role: existUser?.role.name || existUser?.role }
         : {}),
       roleId: existUser?.roleId || 2,
+      uniqueId: existUser?.uniqueId || existUser?.id,
     });
   }
 }

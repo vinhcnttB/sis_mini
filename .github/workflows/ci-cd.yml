@@ -60,7 +60,7 @@ jobs:
         if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'
         run: |
           curl -X POST "${{ secrets.RENDER_DEPLOY_HOOK }}"
-          echo "✅ Deployed to https://sis-mini.onrender.com"
+          echo " Deployed to https://sis-mini.onrender.com"
 
   frontend:
     name: Frontend Build & Test

@@ -52,6 +52,7 @@ async function bootstrap() {
     )
     .build();
   app.useStaticAssets(join(process.cwd(), 'public'));
+  app.useStaticAssets(join(process.cwd(), 'uploads'), { prefix: '/uploads' });
   app.setBaseViewsDir(join(process.cwd(), 'views'));
   app.setViewEngine('hbs');
   const document = SwaggerModule.createDocument(app, options);

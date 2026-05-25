@@ -15,11 +15,13 @@ export class CloudinaryService {
     filename,
     buffer,
   }: {
-    file?: Express.Multer.File,
-    filename?: string,
-    buffer?: Buffer,
+    file?: Express.Multer.File;
+    filename?: string;
+    buffer?: Buffer;
   }): Promise<CloudinaryResponse> {
-    const originalFilename = !filename ? Buffer.from(file.originalname, 'ascii').toString('utf8') : filename;
+    const originalFilename = !filename
+      ? Buffer.from(file.originalname, 'ascii').toString('utf8')
+      : filename;
 
     // Check if Cloudinary is configured. If not, use local file storage fallback.
     if (!process.env.CLOUDINARY_API_KEY || !process.env.CLOUDINARY_NAME) {
@@ -38,7 +40,7 @@ export class CloudinaryService {
       fs.writeFileSync(filePath, fileBuffer);
 
       const port = process.env.PORT || 3334;
-      const backendUrl = `http://localhost:${port}`;
+      const backendUrl = process.env.BACKEND_URL || `http://localhost:${port}`;
       return {
         secure_url: `${backendUrl}/uploads/${uniqueFilename}`,
         original_filename: originalFilename,
@@ -56,8 +58,9 @@ export class CloudinaryService {
           resolve(result);
         },
       );
-      streamifier.createReadStream(!buffer ? file.buffer : buffer).pipe(uploadStream);
+      streamifier
+        .createReadStream(!buffer ? file.buffer : buffer)
+        .pipe(uploadStream);
     });
   }
 }
-
